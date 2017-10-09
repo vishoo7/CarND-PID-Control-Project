@@ -33,9 +33,9 @@ int main(int argc, char *argv[]) {
 
     PID pid;
 
-    double init_Kp = atof(argv[1]);
-    double init_Ki = atof(argv[2]);
-    double init_Kd = atof(argv[3]);
+    double init_Kp = 0.2;
+    double init_Ki = 0.005;
+    double init_Kd = 2.5;
 
     pid.Init(init_Kp, init_Ki, init_Kd);
 
