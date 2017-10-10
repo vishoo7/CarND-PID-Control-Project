@@ -39,16 +39,23 @@ There's an experimental patch for windows in this [PR](https://github.com/udacit
 
 ### The effect each of the P, I, D components had in your implementation
 
-#### P
+#### P (Proportional)
+Steer in proportion to the cross track error. If the term is too high there will be oscillations. If the value is too low there won't be enough error correction and the vehicle will fall off track.
 
-#### I
+#### I (Integral)
+The sum of the cross track error over time. This is for correcting systemic biases. If this term is too low then the car will slowly drift on one side of the road. If the term is too high you will be having more oscillations.
 
-#### D
+#### D (Derivative)
+Change in CTE from one value to another, thus named derivative. This term adds to counter steering to make up for overshooting caused by P. When the term is too low the vehicle will quickly stray out of bounds as a consequence of not having enough counter steering. When the term is too high, although the vehicle would stay centered on the road, it would also waste more throttle constantly steering left and right.
 
 ### How the final hyperparameters were chosen
-I used used the manual tuning method, trying different values with the command line arguments
+I used used the manual tuning method, trying different values with the command line arguments and seeing how the performance in the simulator was.
 
 i.e.
+```
 double init_Kp = atof(argv[1]);
 double init_Ki = atof(argv[2]);
 double init_Kd = atof(argv[3]);
+```
+
+Ultimately the vehicle was able to make a safe passage around the track, albeit probably causing the passengers to get sick during the drive. Certainly there could be a lot more tweaking of the parameters and perhaps getting more creative with throttle control would also help.
